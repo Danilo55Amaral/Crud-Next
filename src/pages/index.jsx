@@ -12,6 +12,10 @@ export default function Home() {
     new Client('Pedro', 54, '4'),
   ];
 
+  function selectedClient(client: Client) {
+
+  };
+
   return (
     <div>
       <Head>
@@ -24,7 +28,9 @@ export default function Home() {
         text-white
       `}>
         <Layout title="Cadastro Simples">
-          <Table clients={clients}></Table>
+          <Table clients={clients} 
+          selectedClient={selectedClient}>
+          </Table>
         </Layout>
       </div>
     </div>
