@@ -1,4 +1,6 @@
 import Head from "next/head";
+import Button from "../components/Button";
+import Form from "../components/Form";
 import Layout from "../components/Layout";
 import Table from "../components/Table";
 import Client from "../core/Client";
@@ -13,7 +15,11 @@ export default function Home() {
   ];
 
   function selectedClient(client: Client) {
+    console.log(client.name)
+  };
 
+  function deletedClient(client: Client) {
+    console.log(`Excluir... ${client.name}`)
   };
 
   return (
@@ -28,9 +34,16 @@ export default function Home() {
         text-white
       `}>
         <Layout title="Cadastro Simples">
-          <Table clients={clients} 
-          selectedClient={selectedClient}>
-          </Table>
+          <div className="flex justify-end">
+            <Button className="mb-4">Novo Cliente</Button>
+          </div>
+
+          <Table clients={clients}
+            selectedClient={selectedClient}
+            deletedClient={deletedClient}
+          />
+
+          <Form client={clients[0]}></Form>
         </Layout>
       </div>
     </div>

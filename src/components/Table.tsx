@@ -8,7 +8,6 @@ interface TableProps {
 };
 
 export default function Table(props: TableProps) {
-
     const actionsDisplay = props.deletedClient || props.selectedClient
 
     function headerRender() {
@@ -17,7 +16,7 @@ export default function Table(props: TableProps) {
                 <th className="text-left p-4">Código</th>
                 <th className="text-left p-4">Nome</th>
                 <th className="text-left p-4">Idade</th>
-               {actionsDisplay ? <th className="p-4">Ações</th> : false } 
+                {actionsDisplay ? <th className="p-4">Ações</th> : false}
             </tr>
         )
     };
@@ -38,9 +37,9 @@ export default function Table(props: TableProps) {
 
     function actionsRender(client: Client) {
         return (
-            <td className="flex">
+            <td className="flex justify-center">
                 {props.selectedClient ? (
-                    <button className={`
+                    <button onClick={() => props.selectedClient?.(client)} className={`
                         flex justify-center items-center 
                         text-green-600 rounded-full p-2 m-1
                         hover:bg-purple-50
@@ -49,7 +48,7 @@ export default function Table(props: TableProps) {
                     </button>
                 ) : false}
                 {props.deletedClient ? (
-                    <button className={`
+                    <button onClick={() => props.deletedClient?.(client)} className={`
                     flex justify-center items-center 
                     text-red-500 rounded-full p-2 m-1
                     hover:bg-purple-50
