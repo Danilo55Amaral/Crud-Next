@@ -38,7 +38,7 @@ export default function Form(props: FormProps) {
                 onChange={setAges}
             />
             <div className="flex justify-end mt-7">
-                <Button className="mr-2" 
+                <Button className="mr-2"
                     onClick={() => props.alterClient?.(new Client(name, +ages, id))}>
                     {id ? 'Alterar' : 'Salvar'}
                 </Button>

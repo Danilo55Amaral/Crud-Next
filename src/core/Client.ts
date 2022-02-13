@@ -20,6 +20,7 @@ export default class Client {
     get name() {
         return this.#name
     };
+
     get ages() {
         return this.#ages
     };
