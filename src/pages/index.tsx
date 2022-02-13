@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { useState } from "react";
 import Button from "../components/Button";
 import Form from "../components/Form";
 import Layout from "../components/Layout";
@@ -6,6 +7,9 @@ import Table from "../components/Table";
 import Client from "../core/Client";
 
 export default function Home() {
+
+  const [client, setClient] = useState<Client>(Client.empty())
+  const [visible, setVisible] = useState<'table' | 'form'>('table')
 
   const clients = [
     new Client('Ana', 34, '1'),
@@ -15,12 +19,25 @@ export default function Home() {
   ];
 
   function selectedClient(client: Client) {
-    console.log(client.name)
+    setClient(client)
+    setVisible('form')
   };
 
   function deletedClient(client: Client) {
     console.log(`Excluir... ${client.name}`)
   };
+
+  function newClient() {
+    setClient(Client.empty())
+    setVisible('form')
+  };
+
+  function saveClient(client: Client) {
+    console.log(client)
+    setVisible('table')
+  };
+
+ 
 
   return (
     <div>
@@ -34,16 +51,27 @@ export default function Home() {
         text-white
       `}>
         <Layout title="Cadastro Simples">
-          <div className="flex justify-end">
-            <Button className="mb-4">Novo Cliente</Button>
-          </div>
+          {visible === 'table' ? (
+            <>
+              <div className="flex justify-end">
+                <Button className="mb-4"
+                onClick={newClient}>
+                  Novo Cliente
+                </Button>
+              </div>
 
-          <Table clients={clients}
-            selectedClient={selectedClient}
-            deletedClient={deletedClient}
-          />
-
-          <Form client={clients[0]}></Form>
+              <Table clients={clients}
+                selectedClient={selectedClient}
+                deletedClient={deletedClient}
+              />
+            </>
+          ) : (
+            <Form 
+              client={client} 
+              alterClient={saveClient}
+              canceled={() => setVisible('table')}
+              />
+          )}
         </Layout>
       </div>
     </div>
